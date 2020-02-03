@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <style type="text/css">
+    body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
+h1, h2, h3, h4, h5, h6{ font-size:100%; }
+address, cite, dfn, em, var { font-style:normal; }
+code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
+small{ font-size:12px; }
+ul, ol { list-style:none; }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; }
+sup { vertical-align:text-top; }
+sub{ vertical-align:text-bottom; }
+legend { color:#000; }
+fieldset, img { border:0; }
+button, input, select, textarea { font-size:100%; }
+table { border-collapse:collapse; border-spacing:0; } 
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: pink;
+        }
+
+        #box2 {
+            /*position: absolute;
+            top: 0;
+            left: 0;*/
+            /*文字内容被覆盖*/
+
+            /*float: left;*/
+            /*文字环绕被挤压*/
+
+            margin-left: -200px;
+            /*文字内容透过来*/
+
+            width: 200px;
+            height: 200px;
+            background: green;
+        }
+
+
+        .jd_banner {
+            width: 100%;
+            height: 10rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .jd_banner ul:first-child {
+            width: 1000%;
+            transform: translateX(-10%);
+            -webkit-transform: translateX(-10%);
+        }
+
+        .jd_banner ul:first-child li {
+            width: 10%;
+            height: 10rem;
+            float: left;
+        }
+
+        .jd_banner ul:first-child li a {
+            display: block;
+            height: 10rem;
+            width: 100%;
+        }
+
+        .jd_banner ul:first-child li a img {
+            display: block;
+            width: 100%;
+            height: 10rem;
+        }
+
+        .jd_banner ul:last-child {
+            position: absolute;
+            height: 6px;
+            left: 50%;
+            bottom: 6px;
+            transform: translateX(-50%);
+        }
+
+        .jd_banner ul:last-child li {
+            width: 6px;
+            height: 6px;
+            border-radius: 3px;
+            border: 1px solid #fff;
+            margin-left: 10px;
+            float: left;
+        }
+
+        .jd_banner ul:last-child li:first-child {
+            margin-left: 0;
+        }
+
+        .jd_banner ul:last-child li.now {
+            background: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--<div id="box2"></div> float-->
+    <!-- <div id="box">boxboxboxboxboxboxbox</div>
+    <div id="box2"></div> -->
+    <div class="jd_banner">
+        <ul class="clearFix">
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+            <li><a href="#"><img src="yyy.jpg" alt=""></a></li>
+        </ul>
+        <ul>
+            <li class="now"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <!--1.定位和浮动会脱离文档流
+        2.margin为负值不会脱离文档流-->
+
+    <script>
+        let a = new Array(5).join(',').split(',');
+
+        var d = Math.round(Math.random() * 30) + 2;
+
+        function ee() {
+            var d = Math.round(Math.random() * 30) + 2;
+            if (a.indexOf(d) === -1) {
+                a.push(d);
+                a.splice(0, 1);
+            }
+            console.log(a, 'a')
+            if (a.indexOf('') !== -1) {
+                ee();
+            }
+        };
+        ee();
+
+        window.onload = function () {
+
+            window.onresize = function () {
+                remrem();
+            }
+
+            function remrem() {
+
+                document.documentElement.style.fontSize = document.documentElement.offsetWidth / 7.5 + 'px';
+            }
+            remrem();
+        }
+
+        /*1. 自动轮播图且无缝   定时器，过渡*/
+        /*2. 点要随着图片的轮播改变  根据索引切换*/
+        /*3. 滑动效果  利用touch事件完成*/
+        /*4. 滑动结束的时候    如果滑动的距离不超过屏幕的1/3  吸附回去   过渡*/
+        /*5. 滑动结束的时候    如果滑动的距离超过屏幕的1/3  切换（上一张，下一张）根据滑动的方向，过渡*/
+        var banner = document.querySelector('.jd_banner');
+        var width = banner.offsetWidth; // 屏幕宽度
+        // 图片容器
+        var imageBox = banner.querySelector('ul:first-child');
+        // 点容器
+        var pointBox = banner.querySelector('ul:last-child');
+        // 所有点
+        var pointAll = pointBox.querySelectorAll('li');
+
+        // 图片数组
+        var imageAll = imageBox.querySelectorAll('li');
+        // 为每一张图设置width
+        for (var i = 0; i < imageAll.length; i++) {
+            var obj = imageAll[i];
+            obj.style.width = width + 'px';
+        }
+        // 图片数量
+        var imageLen = imageAll.length;
+        // 为ul设置width
+        imageBox.style.width = width * imageLen + 'px';
+
+        var addTransition = function () {
+            imageBox.style.transition = 'all 0.4s';
+            imageBox.style.webkitTransition = 'all 0.4s';
+        };
+
+        var removeTransition = function () {
+            imageBox.style.transition = 'none';
+            imageBox.style.webkitTransition = 'none';
+        };
+
+        var setTranslateX = function (translateX) {
+            // imageBox.style.transform = 'translateX(' + translateX + 'px)';
+            // imageBox.style.webkitTransform = 'translateX(' + translateX + 'px)';
+            imageBox.style.transform = `translateX(${translateX}px)`;
+            imageBox.style.webkitTransform = `translateX(${translateX}px)`;
+        }
+
+        var index = 1;
+        var timer = null;
+        startTimer();
+
+        function startTimer() {
+            timer = setInterval(function () {
+                index++;
+                // 过渡
+                addTransition();
+                // 位移
+                setTranslateX(-index * width);
+            }, 2000);
+        };
+
+        // 每张图移动结束后判断是否定位第一张图 过渡结束后触发函数
+        imageBox.addEventListener('transitionend', function () {
+            if (index >= imageLen - 1) {
+                index = 1;
+                removeTransition();
+                setTranslateX(-index * width);
+            } else if (index < 1) {
+                index = imageLen - 1;
+                removeTransition();
+                setTranslateX(index * width);
+            }
+
+            // 根据索引设置点
+            setPoint();
+        });
+
+        function setPoint() {
+            for (var i = 0; i < pointAll.length; i++) {
+                var obj = pointAll[i];
+                obj.classList.remove('now');
+            }
+
+            pointAll[index - 1].classList.add('now');
+        };
+
+        var startX = 0;
+        var distanceX = 0;
+        var isMove = false;
+
+        imageBox.addEventListener('touchstart', function (e) {
+            clearInterval(timer);
+            startX = e.touches[0].clientX;
+        });
+
+        imageBox.addEventListener('touchmove', function (e) {
+            var moveX = e.touches[0].clientX;
+            distanceX = moveX - startX;
+            var translateX = -index * width + distanceX;
+            removeTransition();
+            setTranslateX(translateX);
+            isMove = true;
+        });
+
+        imageBox.addEventListener('touchend', function (e) {
+            if (isMove) {
+                if (Math.abs(distanceX) < width / 3) {
+                    addTransition();
+                    setTranslateX(-index * width);
+                } else {
+                    // 右滑动 下一张
+                    if (distanceX > 0) {
+                        index--;
+                    } else {
+                        index++;
+                    }
+                    addTransition();
+                    setTranslateX(-index * width);
+                }
+            }
+
+            startX = 0;
+            distanceX = 0;
+            isMove = false;
+
+            clearInterval(timer);
+            startTimer();
+        });
+
+        // 冒泡排序
+        function sort(element) {
+
+            for (var i = 0; i < element.length - 1; i++) {
+                for (var j = 0; j < element.length - i - 1; j++) {
+                    if (element[j] > element[j + 1]) {
+                        var swap = element[j];
+                        element[j] = element[j + 1];
+                        element[j + 1] = swap;
+                    }
+                }
+            }
+        }
+
+        var el = [1, 2, 3, 7, 9, 3, 6, 3, 8, 4, 9];
+        console.log(el, 'el');
+        sort(el);
+        console.log(el);
+
+        // 快速排序
+        function quickSort(item) {
+            if (item.length <= 1) {
+                return item
+            }
+            var pivotIndex = Math.floor(item.length / 2);
+            var pivot = item.splice(pivotIndex, 1)[0];
+            var left = [];
+            var right = [];
+            for (var i = 0; i < item.length; i++) {
+                if (item[i] < pivot) {
+                    left.push(item[i]);
+                } else {
+                    right.push(item[i]);
+                }
+            }
+            return quickSort(left).concat([pivot], quickSort(right))
+        }
+        var qArray = [6,7,8,9,5,6,4,3,5,7]
+        console.log(quickSort(qArray), '快速排序');
+
+        // 获取经纬度
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        } else {
+            alert("您的浏览器不支持使用HTML 5来获取地理位置服务");
+        }
+        //定位数据获取成功响应
+        function onSuccess(position) {
+            alert('纬度: ' + position.coords.latitude + '\n' +
+                '经度: ' + position.coords.longitude + '\n' +
+                '海拔: ' + position.coords.altitude + '\n' +
+                '水平精度: ' + position.coords.accuracy + '\n' +
+                '垂直精度: ' + position.coords.altitudeAccura)
+        }
+        //定位数据获取失败响应
+        function onError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("您拒绝对获取地理位置的请求");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("位置信息是不可用的");
+                    break;
+                case error.TIMEOUT:
+                    alert("请求您的地理位置超时");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("未知错误");
+                    break;
+            }
+        }
+
+        // 列表懒加载
+        window.onscroll = function () {
+            //滚动条y轴上的距离
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            //可视区域的高度
+            var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            //可视化的高度与溢出的距离（总高度）
+            var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            if (scrollTop + clientHeight == scrollHeight) {
+                console.log('到底部了！');
+            }
+        };
+        $('.container').scroll(function () {
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(this)[0].scrollHeight;
+            var clientHeight = $(this)[0].offsetHeight;
+            if (scrollTop + clientHeight == scrollHeight) {
+                alert("已经滑到底部了");
+            }
+        });
+        
+        </script>
+
+        <!-- 实现跨域 script标签下载js文件 message回调函数获取文件内部数据 -->
+        <!-- 跨域 第一种方式 -->
+        <script type="text/javascript">
+            var message = function(data) {
+                alert(data[1].title);
+            };
+        </script>
+        <script type="text/javascript" src="http://web.cn/js/message.js"></script>
+
+        <!-- 跨域第二种方式 -->
+        <script type="text/javascript">
+            var messageTow = function (data) {
+                console.log(data);
+            }
+
+            var url = "http://192.168.31.137/train/test/jsonpthree?callback=messagetow";
+            var script = document.createElement('script');
+            script.setAttribute('src', url);
+            document.getElementsByTagName('head')[0].appendChild(script);
+        </script>
+
+        <!-- 基于jquery跨域 -->
+        <!-- 跨域请求是只能是get请求不能使用post请求 -->
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'get',
+                    url: 'http://192.168.31.137/train/test/testjsonp',
+                    data: data,
+                    cache: false,
+                    jsonp: 'callback',
+                    jsonpCallback: 'success',
+                    dataType: 'jsonp',
+                    success: function () {
+                        alert(data);
+                    }
+                })
+            })
+        </script>
+
+        <!-- 实现斐波那契数列 -->
+        <script type="text/javascript">
+            let max = 10000;
+            let arr = [0, 1];
+            (function fibonacci() {
+                let _len = arr.length;
+                let _sub = arr[_len - 2] + arr[_len - 1];
+                if (arr[_len - 1] < max) { 
+                    arr.push(_sub);
+                    fibonacci();
+                }
+            })();
+
+
+            // 数组去重
+            var arrRepeat = [1,2,3,1,2,3,4];
+            var newArray = [...new Set(arrRepeat)];
+
+            var newarr = arrRepeat.reduce((prev, cur) => {
+                prev.indexOf(cur) === -1 && prev.push(cur)
+                return prev;
+            })
+
+
+            // .一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）
+            //         浏览器根据请求的URL交给DNS域名解析，找到真实IP，向服务器发起请求；
+            // 服务器交给后台处理完成后返回数据，浏览器接收文件（HTML、JS、CSS、图象等）；
+            // 浏览器对加载到的资源（HTML、JS、CSS等）进行语法解析，建立相应的内部数据结构（如HTML的DOM）；
+            // 载入解析到的资源文件，渲染页面，完成。
+
+
+        </script>
+</body>
+
+</html>
