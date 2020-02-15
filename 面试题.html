@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+  <script src="./static/jquery-3.4.1.min.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+  <style type="text/css">
+    .imgBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .imgStyle {
+      width: 800px;
+      height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="imgBox">
+    <img class="imgStyle" src="./static/面试题.png" alt="面试题">
+  </div>
+
+  <script>
+    $(function () {
+
+      let a = new Array(5).join(',').split(',');
+
+      var d = Math.round(Math.random() * 30) + 2;
+
+      function ee() {
+        var d = Math.round(Math.random() * 30) + 2;
+        if (a.indexOf(d) === -1) {
+          a.push(d);
+          a.splice(0, 1);
+        }
+        console.log(a, 'a')
+        if (a.indexOf('') !== -1) {
+          ee();
+        }
+      };
+      ee();
+    });
+  </script>
+</body>
+
+</html>

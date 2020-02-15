@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+  <script src="./static/jquery-3.4.1.min.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+  <style type="text/css">
+    img {
+      display: block;
+      margin: 0 auto 50px;
+      width: 960px;
+      height: 540px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+  <img src="default.jpg" data-src="./static/yyy.jpg" alt="">
+
+  <script>
+    $(function () {
+      // 列表懒加载
+      window.onscroll = function () {
+        //滚动条y轴 上的距离
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        //可视区域的高度
+        var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        //可视化的高度与溢出的距离（总高度）
+        var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        if (scrollTop + clientHeight == scrollHeight) {
+          console.log('到底部了！');
+        }
+      };
+
+      // 列表懒加载
+      $('.container').scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(this)[0].scrollHeight;
+        var clientHeight = $(this)[0].offsetHeight;
+        if (scrollTop + clientHeight == scrollHeight) {
+          alert("已经滑到底部了");
+        }
+      });
+
+      // 图片列表懒加载
+      var num = document.getElementsByTagName('img').length;
+      var img = document.getElementsByTagName("img");
+      // 存储图片加载到的位置，避免每次都从第一张图片开始遍历
+      var n = 0;
+      // 页面载入完毕加载可视区域内的图片
+      lazyload();
+      window.onscroll = lazyload;
+      // 监听页面滚动事件
+      function lazyload() {
+        // 可见区域高度
+        var seeHeight = document.documentElement.clientHeight;
+        // 滚动条距离顶部高度
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        for (var i = n; i < num; i++) {
+          if (img[i].offsetTop < seeHeight + scrollTop) {
+            if (img[i].getAttribute("src") == "default.jpg") {
+              // 1、就是创建一个自定义属性data-src存放真正需要显示的图片路径，而img自带的src放一张大小为1 * 1px的图片路径。
+              // 2、当页面滚动直至此图片出现在可视区域时，用js取到该图片的data-src的值赋给src。
+              // ps：自定义属性可以取任何名字
+              img[i].src = img[i].getAttribute("data-src");
+            }
+            n = i + 1;
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

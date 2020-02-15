@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+  <script src="./static/jquery-3.4.1.min.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+</head>
+
+<body>
+
+  <script>
+    $(function () {
+      window.onresize = function () {
+        remrem();
+      }
+
+      function remrem() {
+
+        // 1rem = document.documentElement.style.fontSize
+        // px = 设计图测量尺寸 / 1rem
+        document.documentElement.style.fontSize = document.documentElement.offsetWidth / 100 + 'px';
+      }
+      remrem();
+
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+  <script src="./static/jquery-3.4.1.min.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+  <style type="text/css">
+
+  </style>
+
+</head>
+
+<body>
+
+
+  <!-- 实现斐波那契数列 -->
+  <script type="text/javascript">
+    let max = 10000;
+    let arr = [0, 1];
+    (function fibonacci() {
+      let _len = arr.length;
+      let _sub = arr[_len - 2] + arr[_len - 1];
+      if (arr[_len - 1] < max) {
+        arr.push(_sub);
+        fibonacci();
+      }
+    })();
+
+
+    // 数组去重
+    // 第一种
+    var arrRepeat = [1, 2, 3, 1, 2, 3, 4];
+    var newArray = [...new Set(arrRepeat)];
+
+    // 第二种方法
+    var newarr = arrRepeat.reduce((prev, cur) => {
+      prev.indexOf(cur) === -1 && prev.push(cur)
+      return prev;
+    })
+
+
+    // .一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）
+    // 浏览器根据请求的URL交给DNS域名解析，找到真实IP，向服务器发起请求；
+    // 服务器交给后台处理完成后返回数据，浏览器接收文件（HTML、JS、CSS、图象等）；
+    // 浏览器对加载到的资源（HTML、JS、CSS等）进行语法解析，建立相应的内部数据结构（如HTML的DOM）；
+    // 载入解析到的资源文件，渲染页面，完成。
+  </script>
+
+</body>
+
+</html>

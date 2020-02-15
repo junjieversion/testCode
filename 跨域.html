@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+  <script src="./static/jquery-3.4.1.min.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+  <style type="text/css">
+
+  </style>
+
+</head>
+
+<body>
+
+
+  <!-- 实现跨域 script标签下载js文件 message回调函数获取文件内部数据 -->
+  <!-- 跨域 第一种方式 -->
+  <script type="text/javascript">
+    var message = function (data) {
+      alert(data[1].title);
+    };
+  </script>
+  <script type="text/javascript" src="http://web.cn/js/message.js"></script>
+
+  <!-- 跨域第二种方式 -->
+  <script type="text/javascript">
+    var messageTow = function (data) {
+      console.log(data);
+    }
+
+    var url = "http://192.168.31.137/train/test/jsonpthree?callback=messagetow";
+    var script = document.createElement('script');
+    script.setAttribute('src', url);
+    document.getElementsByTagName('head')[0].appendChild(script);
+  </script>
+
+  <!-- 基于jquery跨域 -->
+  <!-- 跨域请求是只能是get请求不能使用post请求 -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $.ajax({
+        type: 'get',
+        url: 'http://192.168.31.137/train/test/testjsonp',
+        data: data,
+        cache: false,
+        jsonp: 'callback',
+        jsonpCallback: 'success',
+        dataType: 'jsonp',
+        success: function () {
+          alert(data);
+        }
+      })
+    })
+  </script>
+
+</body>
+
+</html>
