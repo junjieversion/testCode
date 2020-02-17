@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+  <script src="./static/jquery-3.4.1.min.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+</head>
+
+<body>
+
+  <script>
+    $(function () {
+      // 原型链继承
+      function Person() {}
+      Person.prototype.hello = "hello";
+      Person.prototype.sayHello = function () {
+        alert(this.hello);
+      }
+
+      function Child() {}
+      //这行的作用是：将Parent中将所有通过prototype追加的属性和方法都追加到Child，从而实现了继承
+      Child.prototype = new Person();
+      Child.prototype.world = "world";
+      Child.prototype.sayWorld = function () {
+        alert(this.world);
+      }
+
+      var c = new Child();
+      c.sayHello();
+      c.sayWorld();
+
+
+      // 对象冒充
+      function Parent(username) {
+        this.username = username;
+        this.hello = function () {
+          alert(this.username);
+        }
+      }
+
+      function Child(username, password) {
+        //通过以下3行实现将Parent的属性和方法追加到Child中，从而实现继承
+        //第一步：this.method是作为一个临时的属性，并且指向Parent所指向的对象，
+        //第二步：执行this.method方法，即执行Parent所指向的对象函数
+        //第三步：销毁this.method属性，即此时Child就已经拥有了Parent的所有属性和方法
+        this.method = Parent;
+        this.method(username); //最关键的一行
+        delete this.method;
+        this.password = password;
+        this.world = function () {
+          alert(this.password);
+        }
+      }
+      var parent = new Parent("zhangsan");
+      var child = new Child("lisi", "123456");
+      parent.hello();
+      child.hello();
+      child.world();
+
+
+      // call()方法方式
+      function test(str) {
+        alert(this.name + " " + str);
+      }
+      var object = new Object();
+      object.name = "zhangsan";
+      test.call(object, "langsin"); //此时，第一个参数值object传递给了test类(即方法)中出现的this，而第二个参数"langsin"则赋值给了test类(即方法)的str
+
+      function Parent(username) {
+        this.username = username;
+        this.hello = function () {
+          alert(this.username);
+        }
+      }
+
+      function Child(username, password) {
+        Parent.call(this, username);
+
+        this.password = password;
+        this.world = function () {
+          alert(this.password);
+        }
+      }
+      var parent = new Parent("zhangsan");
+      var child = new Child("lisi", "123456");
+      parent.hello();
+      child.hello();
+      child.world();
+
+      // apply()方法方式
+      function Parent(username) {
+        this.username = username;
+        this.hello = function () {
+          alert(this.username);
+        }
+      }
+
+      function Child(username, password) {
+        Parent.apply(this, new Array(username));
+        this.password = password;
+        this.world = function () {
+          alert(this.password);
+        }
+      }
+      var parent = new Parent("zhangsan");
+      var child = new Child("lisi", "123456");
+      parent.hello();
+      child.hello();
+      child.world();
+
+
+      // 混合方式
+      function Parent(hello) {
+        this.hello = hello;
+      }
+      Parent.prototype.sayHello = function () {
+        alert(this.hello);
+      }
+
+      function Child(hello, world) {
+        Parent.call(this, hello); //将父类的属性继承过来
+        this.world = world; //新增一些属性
+      }
+
+      Child.prototype = new Parent(); //将父类的方法继承过来
+
+      Child.prototype.sayWorld = function () { //新增一些方法
+        alert(this.world);
+      }
+
+      var c = new Child("zhangsan", "lisi");
+      c.sayHello();
+      c.sayWorld();
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+  <script src="./static/jquery-3.4.1.min.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+  <style type="text/css">
+
+  </style>
+
+</head>
+
+<body>
+
+
+  <script>
+    $(function () {
+      // 页面有跳转的地址，不是直接link过去。要带着当前位置滚动过距离跳转。
+      $('[data-link]').on('click', function (event) { //阻止默认跳转行为，阻止冒泡
+        event.preventDefault();
+        event.stopPropagation();
+        savePage();
+        window.location.href = $(this).attr('data-link');
+      });
+
+      function savePage() { //操作浏览器的历史记录
+        history.replaceState('', document.title, location.href.replace(location.hash, "") + "#nowTop=" + $(window)
+          .scrollTop());
+      }
+      //跳转后的判断
+      if ($('wrap').height() > nowTop) {
+        scrollTo(0, nowTop);
+      }
+    })
+  </script>
+</body>
+
+</html>

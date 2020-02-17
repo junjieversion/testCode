@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+  <script src="./static/jquery-3.4.1.min.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+  <style type="text/css">
+
+  </style>
+
+</head>
+
+<body>
+  <!-- iframe方法 -->
+  <ul class="nav" id="side-menu">
+    <li>
+      <a href="index.html" id="firstNode" class="cur" target="menuFrame"><i
+          class="fa fa-bar-chart-o fa-fw"></i><b>统计报表</b></a>
+      <ul class="nav nav-second-level">
+        <li><a href="import.html" target="menuFrame">进货报表</a></li>
+        <li><a href="export.html" target="menuFrame">出货报表</a></li>
+        <li><a href="check.html" target="menuFrame">毛利报表</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="rewritepwd.html" target="menuFrame"><i class="glyphicon glyphicon-pencil"></i><b>修改密码</b></a>
+    </li>
+
+  </ul>
+
+  <div id="page_content">
+    <iframe id="menuFrame" name="menuFrame" src="index.html" style="overflow:visible;" scrolling="yes" frameborder="no"
+      width="100%" height="100%; float:left">
+    </iframe>
+  </div>
+
+
+
+
+
+  <script>
+    $(function () {
+      // ajax load方法
+      ("li").on('click', function () {
+        var href = $(this).find("a").attr('href');
+        $('#mainContents').empty();
+        $('#mainContents').load("../new/" + href);
+        //阻止跳转
+        $(this).parents('li').addClass('active').siblings('li').removeClass('active');
+        return false;
+      });
+
+
+      //  ajax  方法
+      var menu = $("#menuID>li h2");
+      var srcLi = menu.next('ul').find('li');
+
+      srcLi.on('click', function (e) {
+        var href = $(this).find("a").attr('href');
+        $('#mainContents').empty();
+        $.ajax({
+          //  beforeSend: function(){
+          //      $('#mainContents').html('正在请求');
+          //  },
+          // complete: function(){
+          //      $('#mainContents').html('加载完毕');
+          //     },
+          type: "GET",
+          url: "../new/" + href,
+          success: function (data) {
+            $('#mainContents').append(data);
+          }
+        });
+        //阻止跳转
+        $(this).parents('li').addClass('active').siblings('li').removeClass('active');
+        return false;
+      });
+
+      menu.on('click', function () {
+        $(this).next('ul').slideToggle(400);
+        $(this).stop('false').toggleClass('on');
+      });
+
+
+      // div嵌入
+      document.getElementById("main").innerHTML = '<object type="textml" data="index.html"></object>';
+
+
+      // 树状菜单加载
+      $.ajax({
+        type: "post",
+        url: "../new/txt/txt1.json",
+        dataType: "json",
+        success: function (data) {
+          $("#blank").empty();
+          var employees = data.employees;
+          $.each(data.employees, function (k, v) {
+            var tpl1 =
+              '<div class="halfLeft">' + '<span class="aboutJobs">' + v.职位 + '</span>: ' +
+              '<span class="aboutNames">' + v.姓名 + '</span>;<br/>' + '</div>';
+            $("#blank").append(tpl1);
+          });
+        }
+      })
+
+      // JSON数据格式
+      // {
+      //   "employees": [
+
+      //     {
+      //       "姓名": "张三",
+      //       "职位": "php后台",
+      //       "email": "aaaa"
+      //     },
+
+      //     ...
+      //   ],
+      // }
+    });
+  </script>
+</body>
+
+</html>
