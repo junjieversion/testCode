@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="mystyle.css"> -->
+  <script src="./static/jquery-3.4.1.min.js"></script>
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maixmum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+</head>
+
+<body>
+
+  <script>
+    $(function () {
+      // 获取时间
+      // writeCurrentDate();
+
+      function writeCurrentDate() {
+        var now = new Date();
+        var year = now.getFullYear(); //得到年份
+        var month = now.getMonth(); //得到月份
+        var date = now.getDate(); //得到日期
+        var day = now.getDay(); //得到周几
+        var hour = now.getHours(); //得到小时
+        var minu = now.getMinutes(); //得到分钟
+        var sec = now.getSeconds(); //得到秒
+        var MS = now.getMilliseconds(); //获取毫秒
+        var week;
+        month = month + 1;
+        if (month < 10) month = "0" + month;
+        if (date < 10) date = "0" + date;
+        if (hour < 10) hour = "0" + hour;
+        if (minu < 10) minu = "0" + minu;
+        if (sec < 10) sec = "0" + sec;
+        // if（MS < 100） MS = "0" + MS;
+        var arr_week = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+        week = arr_week[day];
+        var time = "";
+        time = year + "年" + month + "月" + date + "日" + " " + hour + ":" + minu + ":" + sec + " " + week;
+        console.log(time)
+      }
+
+
+      // 时间转换为时间戳
+      // 精确到秒
+      var timestamp = Date.parse(new Date());
+      // 精确到毫秒
+      var timestamp = (new Date()).valueOf();
+
+      var timestamp = new Date().getTime();
+
+      // 时间戳怎么转成日期格式
+      //第一种
+      function getLocalTime(nS) {
+        return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+      }
+      alert()
+      
+      //第二种    
+      function getLocalTime(nS) {
+        return new Date(parseInt(nS) * 1000).toLocaleString().substr(0, 17)
+      }
+
+      //第三种  格式为：2010-10-20 10:00:00
+      function getLocalTime(nS) {
+        return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+      }
+    });
+  </script>
+</body>
+
+</html>
