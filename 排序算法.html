@@ -55,6 +55,32 @@
       var qArray = [6, 7, 8, 9, 5, 6, 4, 3, 5, 7]
       console.log(quickSort(qArray), '快速排序');
 
+      // 插入排序
+      function sort (elements) {
+        // 架设第0个元素是有序数列，第一个以后是无序数列
+        // 所以把无序数列的元素插入到有序数列中
+        for (var i = 1; i < elements.length; i++) {
+          // 升序
+          if (elements[i] < elements[i - 1]) {
+            // 取出无序数列第i个元素插入到有序数列
+            var guran = elements[i]
+
+            // 记住有序数列最后一个位置，并且将有序数列扩大一个位置
+            var j = i - 1;
+            elements[i] = elements[j];
+
+            // 在有序数列中比大小，找到插入元素的合适位置
+            while (j >= 0 && guran < elements[j]) {
+              elements[j + 1] = elements[j];
+              j--;
+            }
+            // 插入
+            elements[j + 1] = guran;
+
+          }
+        }
+      }
+
     });
   </script>
 </body>
